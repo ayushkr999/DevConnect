@@ -122,8 +122,8 @@ JWT_SECRET=your_secret_key
 ### 1. Clone the repository
 
 ```
-git clone https://github.com/your-username/devtinder.git
-cd devtinder
+git clone https://github.com/ayushkr999/devConnect.git
+cd devConnect
 ```
 
 ### 2. Install dependencies
@@ -144,12 +144,6 @@ npm start
 
 * Do NOT commit `.env` or `node_modules`
 * Use `.gitignore` to exclude sensitive files
-
----
-
-## 📄 License
-
-This project is for educational and hackathon purposes.
 
 ---
 
