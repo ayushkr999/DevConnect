@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { createSocketConnection } from "../utils/socket.js";
@@ -13,6 +13,7 @@ export default function Chat() {
     const [newMessage, setNewMessage] = useState("")
     const user = useSelector((store) => store.user);
     const userId = user?._id;
+    const socketRef = useRef(null);
 
     const fetchChatMessages = async () => {
     const chat = await axios.get(BASE_URL + "/chat/" + targetUserId,
@@ -38,15 +39,11 @@ useEffect(() => {
   fetchChatMessages();
 }, []);
 
-useEffect(() => {
-
-}, [userId, targetUserId]);
-
-
     useEffect(() => {
      if (!userId) return;
 
   const socket = createSocketConnection();
+  socketRef.current = socket;
 
   socket.on("connect", () => {
     console.log("✅ Frontend connected:", socket.id);
@@ -69,8 +66,8 @@ useEffect(() => {
      // Send message handler
    const sendMessage = () => {
     console.log("clicked")
-   const socket=createSocketConnection();
-   socket.emit("sendMessage",{
+   if (!socketRef.current) return;
+   socketRef.current.emit("sendMessage",{
     firstname: user.firstname,
     userId,
     targetUserId,

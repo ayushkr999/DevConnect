@@ -1,22 +1,22 @@
 import { Server } from "socket.io";
-import crypto from "crypto"
-import { timeStamp } from "console";
+import crypto from "crypto";
 import Chat from "../models/chat.js";
 
-const getSecretRoomId=(userId,targetUserId)=>{
+const getSecretRoomId = (userId, targetUserId) => {
     return crypto
     .createHash("sha256")
-    .update([userId,targetUserId].sort().join("-"))
-    .digest("hex")
-}
+    .update([userId, targetUserId].sort().join("-"))
+    .digest("hex");
+};
 
 const initializeSocket = (server) => {
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
+  : ["http://localhost:5173"];
+
 const io = new Server(server, {
   cors: {
-    origin: [
-      "http://localhost:5173",
-      "https://dev-connect-liart.vercel.app",
-    ],
+    origin: allowedOrigins,
     credentials: true,
   },
 });
