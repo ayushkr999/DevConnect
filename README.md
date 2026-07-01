@@ -9,7 +9,7 @@
 
 Create a new developer account to join the DevConnect platform.
 
-![User Registration](./screenshots/signup-page.png.jpeg)
+![User Registration](./screenshots/SignUp-page.png.jpeg)
 
 ---
 
@@ -25,7 +25,7 @@ Authenticate securely and access your developer dashboard.
 
 Browse developer profiles, explore skills, and send connection requests.
 
-![Discover Developers](./screenshots/discover-developers.png.jpeg)
+![Discover Developers](./screenshots/discover-developer.png.jpeg)
 
 ---
 
@@ -41,9 +41,15 @@ Update your personal information, profile picture, bio, and instantly preview pr
 
 Review incoming connection requests, inspect developer profiles, and accept or reject requests.
 
-![Connection Requests](./screenshots/request-page.png.jpeg)
+![Connection Requests](./screenshots/request-page.png.png)
 
 ---
+
+## 🤝 My Connections
+
+View all your accepted developer connections.
+
+![Connections](./screenshots/connection-page.png.jpeg)
 
 ## 🤝 Developer Connections
 
@@ -126,6 +132,7 @@ React ↔ Socket.IO ↔ Node Server
 
 ## 📁 Project Structure
 
+```text
 DevConnect/
 ├── backend/
 │   ├── index.js
@@ -180,8 +187,7 @@ DevConnect/
             ├── requestSlice.js
             ├── socket.js
             └── constant.js
-
----
+```
 
 ## 🚀 Summary
 
