@@ -3,6 +3,12 @@
 > A full-stack developer networking and real-time chat platform built using MERN stack + Socket.IO. It allows developers to discover profiles, connect, and chat instantly in real time.
 
 
+## 🌐 Live Demo
+
+**Frontend:** https://dev-connect-phi-kohl.vercel.app
+
+---
+
 # 📸 Screenshots
 
 ## 📝 User Registration
