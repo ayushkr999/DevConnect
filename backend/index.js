@@ -17,17 +17,23 @@ dotenv.config();
 const app = express();
 
 // ── CORS ──────────────────────────────────────────────────────────────────────
-// Parse comma-separated origins from env so nothing is ever hardcoded.
+// Parse comma-separated origins from ALLOWED_ORIGINS env var.
 const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
   : ["http://localhost:5173"];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
+console.log("Allowed origins:", allowedOrigins);
+
+const corsOptions = {
+  origin: allowedOrigins,
+  credentials: true,
+};
+
+// Handle preflight OPTIONS requests for ALL routes
+app.options("*", cors(corsOptions));
+
+// Apply CORS to all routes
+app.use(cors(corsOptions));
 
 // ── Body / Cookie parsers ─────────────────────────────────────────────────────
 app.use(express.json());
