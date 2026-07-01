@@ -9,7 +9,7 @@
 
 Create a new developer account to join the DevConnect platform.
 
-![User Registration](./screenshots/signup-page.png)
+![User Registration](./screenshots/signup-page.png.jpeg)
 
 ---
 
@@ -17,7 +17,7 @@ Create a new developer account to join the DevConnect platform.
 
 Authenticate securely and access your developer dashboard.
 
-![Secure User Login](./screenshots/Login-page.png)
+![Secure User Login](./screenshots/Login-page.png.jpeg)
 
 ---
 
@@ -25,7 +25,7 @@ Authenticate securely and access your developer dashboard.
 
 Browse developer profiles, explore skills, and send connection requests.
 
-![Discover Developers](./screenshots/discover-developers.png)
+![Discover Developers](./screenshots/discover-developers.png.jpeg)
 
 ---
 
@@ -33,7 +33,7 @@ Browse developer profiles, explore skills, and send connection requests.
 
 Update your personal information, profile picture, bio, and instantly preview profile changes.
 
-![Edit Profile](./screenshots/edit-profile.png)
+![Edit Profile](./screenshots/edit-profile.png.jpeg)
 
 ---
 
@@ -41,7 +41,7 @@ Update your personal information, profile picture, bio, and instantly preview pr
 
 Review incoming connection requests, inspect developer profiles, and accept or reject requests.
 
-![Connection Requests](./screenshots/request-page.png)
+![Connection Requests](./screenshots/request-page.png.jpeg)
 
 ---
 
@@ -49,7 +49,7 @@ Review incoming connection requests, inspect developer profiles, and accept or r
 
 View accepted connections, explore developer skills, and start conversations with connected developers.
 
-![Developer Connections](./screenshots/connection-page.png)
+![Developer Connections](./screenshots/connection-page.png.jpeg)
 ---
 
 ## 🔥 Features
