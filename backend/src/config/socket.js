@@ -11,12 +11,15 @@ const getSecretRoomId=(userId,targetUserId)=>{
 }
 
 const initializeSocket = (server) => {
-  const io = new Server(server, {
-    cors: {
-      origin: "http://localhost:5173",
-      credentials: true,
-    },
-  });
+const io = new Server(server, {
+  cors: {
+    origin: [
+      "http://localhost:5173",
+      "https://dev-connect-liart.vercel.app",
+    ],
+    credentials: true,
+  },
+});
 
   io.on("connection", (socket) => {
     console.log("User connected:", socket.id);
