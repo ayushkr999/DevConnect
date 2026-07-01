@@ -51,11 +51,6 @@ View all your accepted developer connections.
 
 ![Connections](./screenshots/connection-page.png.jpeg)
 
-## 🤝 Developer Connections
-
-View accepted connections, explore developer skills, and start conversations with connected developers.
-
-![Developer Connections](./screenshots/connection-page.png.jpeg)
 ---
 
 ## 🔥 Features
