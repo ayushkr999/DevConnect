@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { BASE_URL } from "../utils/constant";
 import axios from "axios";
@@ -30,12 +30,9 @@ const UserCard = ({ user }) => {
         { withCredentials: true }
       );
 
-      console.log("SUCCESS:", res.data);
-
       dispatch(removeUserFromFeed(userId));
     } catch (err) {
-      console.log("Status:", err.response?.status);
-      console.log("Data:", err.response?.data);
+      console.error("Send request failed:", err.response?.data?.message || err.message);
     } finally {
       setLoading(false);
     }

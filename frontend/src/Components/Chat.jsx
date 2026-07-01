@@ -16,24 +16,24 @@ export default function Chat() {
     const socketRef = useRef(null);
 
     const fetchChatMessages = async () => {
-    const chat = await axios.get(BASE_URL + "/chat/" + targetUserId,
-    {
-      withCredentials: true,
+    try {
+      const chat = await axios.get(BASE_URL + "/chat/" + targetUserId, {
+        withCredentials: true,
+      });
+
+      const chatMessages = chat?.data?.messages.map((msg) => ({
+        firstname: msg.senderId?.firstname,
+        lastname: msg.senderId?.lastname,
+        userId: msg.senderId?._id,
+        text: msg.text,
+        createdAt: msg.createdAt,
+      }));
+
+      setMessages(chatMessages);
+    } catch (err) {
+      console.error("Failed to fetch chat messages:", err.message);
     }
-  );
-
-  console.log(chat.data.messages);
-
-   const chatMessages = chat?.data?.messages.map((msg) => ({
-     firstname: msg.senderId?.firstname,
-     lastname: msg.senderId?.lastname,
-     userId: msg.senderId?._id,
-    text: msg.text,
-    createdAt: msg.createdAt,
- }));
-
-  setMessages(chatMessages);
- };
+  };
 
 useEffect(() => {
   fetchChatMessages();
@@ -46,17 +46,15 @@ useEffect(() => {
   socketRef.current = socket;
 
   socket.on("connect", () => {
-    console.log("✅ Frontend connected:", socket.id);
-    socket.emit("joinChat", {firstname:user.firstname, userId, targetUserId });
+    socket.emit("joinChat", { firstname: user.firstname, userId, targetUserId });
   });
 
   socket.on("connect_error", (err) => {
-    console.log("❌ Socket connection error:", err.message);
+    console.error("Socket connection error:", err.message);
   });
 
-  socket.on("messageReceived",({firstname,text})=>{
-    console.log(firstname+" "+text);
-    setMessages((messages)=>[...messages,{firstname,text}])
+  socket.on("messageReceived", ({ firstname, text }) => {
+    setMessages((prev) => [...prev, { firstname, text }]);
   })
 
   return () => socket.disconnect();
@@ -65,8 +63,7 @@ useEffect(() => {
 
      // Send message handler
    const sendMessage = () => {
-    console.log("clicked")
-   if (!socketRef.current) return;
+   if (!socketRef.current || !newMessage.trim()) return;
    socketRef.current.emit("sendMessage",{
     firstname: user.firstname,
     userId,

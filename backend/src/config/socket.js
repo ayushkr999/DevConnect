@@ -2,90 +2,64 @@ import { Server } from "socket.io";
 import crypto from "crypto";
 import Chat from "../models/chat.js";
 
-const getSecretRoomId = (userId, targetUserId) => {
-    return crypto
+// Deterministic private room ID for any two users regardless of who initiates
+const getSecretRoomId = (userId, targetUserId) =>
+  crypto
     .createHash("sha256")
     .update([userId, targetUserId].sort().join("-"))
     .digest("hex");
-};
 
 const initializeSocket = (server) => {
-const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
-  : ["http://localhost:5173"];
+  const allowedOrigins = process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
+    : ["http://localhost:5173"];
 
-const io = new Server(server, {
-  cors: {
-    origin: allowedOrigins,
-    credentials: true,
-  },
-});
+  const io = new Server(server, {
+    cors: {
+      origin: allowedOrigins,
+      credentials: true,
+    },
+  });
 
   io.on("connection", (socket) => {
-    console.log("User connected:", socket.id);
+    // ── Join a private chat room ───────────────────────────────────────────
+    socket.on("joinChat", ({ userId, targetUserId }) => {
+      const roomId = getSecretRoomId(userId, targetUserId);
+      socket.join(roomId);
+    });
 
- socket.on("joinChat", ({ firstname, userId, targetUserId }) => {
-  const roomId = getSecretRoomId(userId, targetUserId);
+    // ── Send a message ────────────────────────────────────────────────────
+    socket.on("sendMessage", async ({ firstname, userId, targetUserId, text }) => {
+      const roomId = getSecretRoomId(userId, targetUserId);
 
-  console.log("firstname:", firstname);
-  console.log("userId:", userId);
-  console.log("targetUserId:", targetUserId);
-  console.log("roomId:", roomId);
-
-  socket.join(roomId);
-});
-
-
-    // Send message
-   socket.on(
-  "sendMessage",
-  async ({ firstname, userId, targetUserId, text }) => {
-    const roomId = getSecretRoomId(userId, targetUserId);
-
-    try {
-      let chat = await Chat.findOne({
-        participants: { $all: [userId, targetUserId] },
-      });
-
-      if (!chat) {
-        chat = new Chat({
-          participants: [userId, targetUserId],
-          messages: [],
+      try {
+        let chat = await Chat.findOne({
+          participants: { $all: [userId, targetUserId] },
         });
+
+        if (!chat) {
+          chat = new Chat({ participants: [userId, targetUserId], messages: [] });
+        }
+
+        chat.messages.push({ senderId: userId, text });
+        await chat.save();
+
+        io.to(roomId).emit("messageReceived", {
+          firstname,
+          text,
+          timestamp: new Date(),
+        });
+      } catch (err) {
+        // Surface error back to the sender only
+        socket.emit("messageError", { message: "Failed to send message" });
       }
+    });
 
-      chat.messages.push({
-        senderId: userId,
-        text,
-      });
-
-      await chat.save();
-
-      io.to(roomId).emit("messageReceived", {
-        firstname,
-        text,
-        timestamp: new Date(),
-      });
-
-    } catch (err) {
-      console.log(err);
-    }
-  }
-);
-
-
-    // Disconnect
+    // ── Disconnect ────────────────────────────────────────────────────────
     socket.on("disconnect", () => {
-      console.log("User disconnected:", socket.id);
+      // No-op — kept for clarity; socket rooms are cleaned up automatically
     });
   });
 };
 
 export default initializeSocket;
-
-
-
-
-
-
-   

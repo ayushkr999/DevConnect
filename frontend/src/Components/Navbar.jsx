@@ -19,7 +19,7 @@ export function Navbar() {
       dispatch(removeUser());
       navigate("/login");
     } catch (err) {
-      console.log(err);
+      console.error("Logout failed:", err.message);
     }
   };
 

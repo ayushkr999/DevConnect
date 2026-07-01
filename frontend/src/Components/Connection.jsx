@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { BASE_URL } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
@@ -16,7 +16,7 @@ const Connection = () => {
       });
       dispatch(addConnections(res.data.data));
     } catch (err) {
-      console.log(err);
+      console.error("Failed to fetch connections:", err.message);
     }
   };
 

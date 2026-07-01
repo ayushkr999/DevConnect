@@ -9,13 +9,15 @@ import authRoutes from "./src/routes/auth.route.js";
 import profileRoutes from "./src/routes/profile.route.js";
 import connectionRequestRouter from "./src/routes/connectionRequest.routes.js";
 import networkRoutes from "./src/routes/network.routes.js";
-import chatRoutes from "./src/routes/chat.route.js"
+import chatRoutes from "./src/routes/chat.route.js";
 import initializeSocket from "./src/config/socket.js";
 
 dotenv.config();
 
 const app = express();
 
+// ── CORS ──────────────────────────────────────────────────────────────────────
+// Parse comma-separated origins from env so nothing is ever hardcoded.
 const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(",").map((o) => o.trim())
   : ["http://localhost:5173"];
@@ -27,23 +29,35 @@ app.use(
   })
 );
 
+// ── Body / Cookie parsers ─────────────────────────────────────────────────────
 app.use(express.json());
 app.use(cookieParser());
 
+// ── Health-check route (Render pings this to confirm the server is up) ────────
+app.get("/health", (_req, res) => res.status(200).json({ status: "ok" }));
+
+// ── Database ──────────────────────────────────────────────────────────────────
 dbConnect();
 
+// ── HTTP server + Socket.IO ───────────────────────────────────────────────────
 const server = http.createServer(app);
-
 initializeSocket(server);
 
+// ── API Routes ────────────────────────────────────────────────────────────────
 app.use("/api/auth", authRoutes);
 app.use("/api", profileRoutes);
 app.use("/api", connectionRequestRouter);
 app.use("/api", networkRoutes);
-app.use("/api",chatRoutes)
+app.use("/api", chatRoutes);
 
+// ── Global error handler ──────────────────────────────────────────────────────
+app.use((err, _req, res, _next) => {
+  console.error(err.stack);
+  res.status(500).json({ success: false, message: "Internal server error" });
+});
+
+// ── Start ─────────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 5000;
-
 server.listen(PORT, () => {
   console.log(`Server is listening at port ${PORT}`);
 });

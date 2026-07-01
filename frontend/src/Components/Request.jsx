@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BASE_URL } from "../utils/constant";
 import { addRequests, removeRequest } from "../utils/requestSlice";
@@ -17,21 +17,18 @@ const Request = () => {
       );
       dispatch(removeRequest(_id));
     } catch (err) {
-      console.log(err);
+      console.error("Failed to review request:", err.message);
     }
   };
 
   const fetchRequests = async () => {
     try {
-      const res = await axios.get(
-        BASE_URL + "/user/requests/received",
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get(BASE_URL + "/user/requests/received", {
+        withCredentials: true,
+      });
       dispatch(addRequests(res.data.data));
     } catch (err) {
-      console.log(err);
+      console.error("Failed to fetch requests:", err.message);
     }
   };
 
