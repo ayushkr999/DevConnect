@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { createSocketConnection } from "../utils/socket.js";
@@ -75,7 +74,7 @@ useEffect(() => {
 
   return (
     <div className="w-full max-w-3xl mx-auto py-2">
-      <div className="rounded-2xl border border-slate-800 bg-slate-900 shadow-xl flex flex-col h-[550px] overflow-hidden">
+      <div className="rounded-2xl border border-slate-800 bg-slate-900 shadow-xl flex flex-col h-137.5 overflow-hidden">
 
         {/* Header */}
         <div className="border-b border-slate-800 px-5 py-4 text-white font-bold bg-slate-900 flex items-center gap-2.5">
@@ -108,7 +107,7 @@ useEffect(() => {
 
                   <div
                     className={`
-                      px-4 py-2.5 rounded-2xl text-sm break-words shadow-sm
+                      px-4 py-2.5 rounded-2xl text-sm wrap-break-word shadow-sm
                       ${
                         msg.userId === userId
                           ? "bg-indigo-600 text-white rounded-tr-sm border border-indigo-500/20"
