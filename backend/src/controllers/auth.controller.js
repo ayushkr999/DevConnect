@@ -24,11 +24,12 @@ const signup=async(req,res)=>{
 
    const token=await user.generateAuthToken();
 
-     const cookieOptions = {
-      httpOnly: true,
-      secure: true,
-      maxAge: 24 * 60 * 60 * 1000,
-    };
+    const cookieOptions = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None",
+  maxAge: 24 * 60 * 60 * 1000,
+};
     res.cookie("token", token, cookieOptions);
 
        return res.status(201).json({
@@ -82,6 +83,7 @@ const login = async (req, res) => {
     const cookieOptions = {
       httpOnly: true,
       secure: true,
+        sameSite: "None",
       maxAge: 24 * 60 * 60 * 1000,
     };
 
@@ -105,10 +107,11 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: true,
-  });
+res.clearCookie("token", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "None",
+});
 
   return res.status(200).json({
     success: true,
