@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { createSocketConnection } from "../utils/socket.js";
 import { BASE_URL } from "../utils/constant.js";
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Chat() {
 
