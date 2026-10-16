@@ -10,6 +10,7 @@ import Connection from "./Components/Connection";
 import Request from "./Components/Request";
 import { Toaster } from "react-hot-toast";
 import Chat from "./Components/Chat";
+import LandingPage from "./Components/LandingPage";
 
 function App() {
   return (
@@ -18,9 +19,10 @@ function App() {
          <Toaster position="top-center" reverseOrder={false} />
             <Routes>
 
-              <Route path="/" element={<Navigate to="/login" />} />
+              <Route path="/" element={<LandingPage />} />
 
               <Route path="/login" element={<AuthPage />} />
+              <Route path="/signup" element={<AuthPage />} />
 
               <Route path="/app" element={<Body />}>
 

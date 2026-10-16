@@ -2,21 +2,27 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { BASE_URL } from "../utils/constant";
 import { Code2, Compass, MessageSquare, Sparkles, AlertCircle } from "lucide-react";
 
 const AuthPage = () => {
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
 
-  const [isLoginForm, setIsLoginForm] = useState(true);
+  const [isLoginForm, setIsLoginForm] = useState(location.pathname !== "/signup");
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    setIsLoginForm(location.pathname !== "/signup");
+    setError("");
+  }, [location.pathname]);
 
   // Login
   const handleLogin = async () => {
