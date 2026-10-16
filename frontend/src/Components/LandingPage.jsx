@@ -10,6 +10,10 @@ import {
   Sparkles,
   ArrowRight,
   Check,
+  CheckCheck,
+  Send,
+  Heart,
+  X,
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,68 +22,113 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function LandingPage() {
   const navRef = useRef(null);
-  const heroRef = useRef(null);
+  const heroTextRef = useRef(null);
+  const heroVisualRef = useRef(null);
   const featuresRef = useRef(null);
   const ctaRef = useRef(null);
 
   useEffect(() => {
+    // Check if user prefers reduced motion
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      return;
+    }
+
     const ctx = gsap.context(() => {
       // 1. Navbar entrance
       if (navRef.current) {
-        gsap.from(navRef.current, {
-          y: -15,
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        });
+        gsap.fromTo(
+          navRef.current,
+          { y: -15, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }
+        );
       }
 
-      // 2. Hero content entrance
-      if (heroRef.current) {
-        gsap.from(heroRef.current.children, {
-          y: 20,
-          opacity: 0,
-          duration: 0.7,
-          stagger: 0.12,
-          ease: "power2.out",
-          delay: 0.1,
-        });
+      // 2. Hero text content entrance
+      if (heroTextRef.current) {
+        gsap.fromTo(
+          heroTextRef.current.children,
+          { y: 20, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out",
+            delay: 0.1,
+          }
+        );
       }
 
-      // 3. Feature cards stagger on scroll
+      // 3. Hero visual preview entrance
+      if (heroVisualRef.current) {
+        gsap.fromTo(
+          heroVisualRef.current,
+          { y: 25, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power2.out",
+            delay: 0.25,
+          }
+        );
+      }
+
+      // 4. Feature cards stagger on scroll
       if (featuresRef.current) {
         const cards = featuresRef.current.querySelectorAll(".feature-card");
-        gsap.from(cards, {
-          scrollTrigger: {
-            trigger: featuresRef.current,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-          y: 25,
-          opacity: 0,
-          duration: 0.55,
-          stagger: 0.08,
-          ease: "power2.out",
-        });
+        gsap.fromTo(
+          cards,
+          { y: 25, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: featuresRef.current,
+              start: "top 85%",
+              once: true,
+            },
+          }
+        );
       }
 
-      // 4. CTA section entrance on scroll
+      // 5. CTA section entrance on scroll
       if (ctaRef.current) {
-        gsap.from(ctaRef.current, {
-          scrollTrigger: {
-            trigger: ctaRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-          y: 20,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        });
+        gsap.fromTo(
+          ctaRef.current,
+          { y: 20, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ctaRef.current,
+              start: "top 90%",
+              once: true,
+            },
+          }
+        );
       }
+
+      ScrollTrigger.refresh();
     });
 
-    return () => ctx.revert();
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
+    return () => {
+      clearTimeout(refreshTimer);
+      ctx.revert();
+    };
   }, []);
 
   const scrollToFeatures = (e) => {
@@ -152,50 +201,190 @@ export default function LandingPage() {
       {/* ================================================== */}
       {/* 2. HERO SECTION                                    */}
       {/* ================================================== */}
-      <section className="relative px-4 sm:px-6 lg:px-8 pt-20 pb-24 sm:pt-28 sm:pb-32 flex-1 flex flex-col justify-center">
-        <div
-          ref={heroRef}
-          className="max-w-3xl mx-auto text-center flex flex-col items-center"
-        >
-          {/* Subtle Tag */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7E8F0] border border-[#E9E3EC] text-[#D43F6C] text-xs font-semibold mb-6 shadow-2xs">
-            <Sparkles className="h-3.5 w-3.5" />
-            <span>Developer Networking Platform</span>
-          </div>
-
-          {/* Main Heading */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#252525] leading-tight">
-            Connect. Match. <span className="text-[#D43F6C]">Collaborate.</span>
-          </h1>
-
-          {/* Description */}
-          <p className="mt-6 text-base sm:text-lg text-[#666666] leading-relaxed max-w-2xl">
-            DevConnect is a developer networking platform to discover developers,
-            build connections, and collaborate on projects.
-          </p>
-
-          {/* Call to Action Buttons */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
-            <Link
-              to="/signup"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-[#D43F6C] hover:bg-[#c0325d] text-white font-semibold text-sm sm:text-base shadow-xs transition duration-150 active:scale-[0.98]"
+      <section className="relative px-4 sm:px-6 lg:px-8 pt-12 pb-20 sm:pt-16 sm:pb-24 lg:pt-20 lg:pb-28">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            
+            {/* Left Column: Hero Text Content */}
+            <div
+              ref={heroTextRef}
+              className="lg:col-span-7 flex flex-col items-start text-left"
             >
-              <span>Get Started</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+              {/* Subtle Tag */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F7E8F0] border border-[#E9E3EC] text-[#D43F6C] text-xs font-semibold mb-6 shadow-2xs">
+                <Sparkles className="h-3.5 w-3.5" />
+                <span>Developer Networking Platform</span>
+              </div>
 
-            <Link
-              to="/login"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3 rounded-xl border border-[#E9E3EC] bg-[#FFFFFF] hover:bg-[#FAF5FB] text-[#252525] font-semibold text-sm sm:text-base transition duration-150 shadow-2xs"
+              {/* Main Headline */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#252525] leading-tight">
+                Connect. Match. <span className="text-[#D43F6C]">Collaborate.</span>
+              </h1>
+
+              {/* Description */}
+              <p className="mt-5 text-base sm:text-lg text-[#666666] leading-relaxed max-w-xl">
+                DevConnect is a developer networking platform that helps developers
+                discover like-minded people, showcase their skills, build
+                meaningful connections, and communicate through real-time chat.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                <a
+                  href="#features"
+                  onClick={scrollToFeatures}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-[#E9E3EC] bg-[#FFFFFF] hover:bg-[#FAF5FB] text-[#252525] font-semibold text-sm sm:text-base transition duration-150 shadow-2xs cursor-pointer"
+                >
+                  <Compass className="h-4 w-4 text-[#D43F6C]" />
+                  <span>Explore Features</span>
+                </a>
+
+                <Link
+                  to="/signup"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#D43F6C] hover:bg-[#c0325d] text-white font-semibold text-sm sm:text-base shadow-xs transition duration-150 active:scale-[0.98]"
+                >
+                  <span>Get Started</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+
+              {/* Subtle Platform Indicators */}
+              <div className="mt-10 pt-6 border-t border-[#E9E3EC] w-full max-w-md flex items-center justify-between text-xs text-[#8A8A8A] font-medium">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-[#18A866]" />
+                  <span>Real-Time Sockets</span>
+                </div>
+                <span>•</span>
+                <div className="flex items-center gap-1.5">
+                  <Heart className="w-3.5 h-3.5 text-[#D43F6C]" />
+                  <span>Profile Matching</span>
+                </div>
+                <span>•</span>
+                <div className="flex items-center gap-1.5">
+                  <MessageCircle className="w-3.5 h-3.5 text-[#F05A24]" />
+                  <span>Direct Chat</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Visual Preview of Real DevConnect UI */}
+            <div
+              ref={heroVisualRef}
+              className="lg:col-span-5 relative flex justify-center lg:justify-end"
             >
-              Sign In
-            </Link>
+              <div className="relative w-full max-w-sm sm:max-w-md">
+                
+                {/* Main Card: Developer Profile Preview */}
+                <div className="bg-[#FFFFFF] border border-[#E9E3EC] rounded-2xl shadow-md overflow-hidden transition duration-200">
+                  {/* Card Header with Photo */}
+                  <div className="relative h-60 bg-[#FAF5FB] overflow-hidden">
+                    <img
+                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80"
+                      alt="Sarah Chen"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+                    
+                    {/* User Name & Info */}
+                    <div className="absolute bottom-3 left-4 right-4 text-white">
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-xl font-bold tracking-tight">
+                          Sarah Chen
+                        </h2>
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#18A866] border-2 border-white" />
+                      </div>
+                      <p className="text-xs text-white/90 font-medium mt-0.5">
+                        24 yrs • Full Stack Developer
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="p-4 space-y-3">
+                    {/* Skills Badges */}
+                    <div className="flex flex-wrap gap-1.5">
+                      {["React", "Node.js", "MongoDB", "TailwindCSS"].map(
+                        (skill) => (
+                          <span
+                            key={skill}
+                            className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#F7E8F0] text-[#B8325A] border border-[#E9E3EC]"
+                          >
+                            {skill}
+                          </span>
+                        )
+                      )}
+                    </div>
+
+                    <p className="text-xs text-[#666666] leading-relaxed line-clamp-2 italic">
+                      "Building responsive full-stack applications. Looking for peers to collaborate on open-source web projects!"
+                    </p>
+
+                    {/* Matching Action Buttons */}
+                    <div className="flex gap-2.5 pt-1">
+                      <button
+                        type="button"
+                        className="flex-1 py-2 rounded-xl border border-[#E9E3EC] bg-[#FFFFFF] text-[#666666] font-semibold text-xs flex items-center justify-center gap-1.5 hover:bg-[#FAF5FB] transition cursor-default"
+                      >
+                        <X className="h-3.5 w-3.5" />
+                        <span>Ignore</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        className="flex-1 py-2 rounded-xl bg-[#F05A24] text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-2xs hover:bg-[#E85D04] transition cursor-default"
+                      >
+                        <Heart className="h-3.5 w-3.5 fill-white" />
+                        <span>Connect</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Preview Element 1: Connection Request Notification */}
+                <div className="absolute -top-6 -left-4 sm:-left-8 bg-[#FFFFFF] border border-[#E9E3EC] rounded-2xl p-3 shadow-md flex items-center gap-3 max-w-[260px] animate-in fade-in duration-300">
+                  <div className="w-8 h-8 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center shrink-0">
+                    <UserPlus className="h-4 w-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-bold text-[#252525] truncate">
+                      Connection Accepted
+                    </p>
+                    <p className="text-[10px] text-[#666666] truncate">
+                      Alex Rivera connected with you
+                    </p>
+                  </div>
+                  <div className="w-5 h-5 rounded-full bg-[#18A866]/10 text-[#18A866] flex items-center justify-center shrink-0 ml-auto">
+                    <Check className="h-3 w-3" />
+                  </div>
+                </div>
+
+                {/* Floating Preview Element 2: Real-Time Chat Message Bubble */}
+                <div className="absolute -bottom-6 -right-2 sm:-right-6 bg-[#FFFFFF] border border-[#E9E3EC] rounded-2xl p-3 shadow-md flex items-center gap-2.5 max-w-[270px]">
+                  <div className="w-8 h-8 rounded-full bg-[#FAF5FB] border border-[#E9E3EC] flex items-center justify-center shrink-0 text-[#D43F6C]">
+                    <MessageCircle className="h-4 w-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-bold text-[#252525]">
+                        Alex
+                      </span>
+                      <span className="text-[9px] text-[#8A8A8A]">Just now</span>
+                    </div>
+                    <p className="text-[10px] text-[#666666] truncate">
+                      "Hey! Loved your profile. Want to collaborate?"
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* ================================================== */}
-      {/* 3. FEATURES                                        */}
+      {/* 3. FEATURES SECTION                                */}
       {/* ================================================== */}
       <section
         id="features"
@@ -213,117 +402,120 @@ export default function LandingPage() {
             </p>
           </div>
 
-          {/* Features Grid */}
+          {/* Features Grid: 3 cols on desktop, 2 on tablet, 1 on mobile */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
             {/* Feature 1 */}
-            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-xs transition duration-200 flex flex-col">
-              <div className="h-11 w-11 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
-                <Compass className="h-5 w-5" />
+            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
+                  <Compass className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-[#252525] mb-2">
+                  1. Discover Developers
+                </h3>
+                <p className="text-sm text-[#666666] leading-relaxed">
+                  Discover other developers based on their profiles, skills, and interests.
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-[#252525] mb-2">
-                1. Discover Developers
-              </h3>
-              <p className="text-sm text-[#666666] leading-relaxed">
-                Users can discover other developers based on their profiles, skills and interests.
-              </p>
             </div>
 
             {/* Feature 2 */}
-            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-xs transition duration-200 flex flex-col">
-              <div className="h-11 w-11 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
-                <User className="h-5 w-5" />
+            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
+                  <User className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-[#252525] mb-2">
+                  2. Developer Profiles
+                </h3>
+                <p className="text-sm text-[#666666] leading-relaxed mb-3">
+                  Create and update your profile with your name, age, gender, about section, profile photo, and skills.
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-[#252525] mb-2">
-                2. Developer Profiles
-              </h3>
-              <p className="text-sm text-[#666666] leading-relaxed mb-3">
-                Users can create and update their profile with:
-              </p>
-              <ul className="text-xs sm:text-sm text-[#666666] space-y-1.5 mt-auto">
-                <li className="flex items-center gap-2">
-                  <Check className="h-3.5 w-3.5 text-[#18A866] shrink-0" />
-                  <span>Name</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-3.5 w-3.5 text-[#18A866] shrink-0" />
-                  <span>Age</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-3.5 w-3.5 text-[#18A866] shrink-0" />
-                  <span>Gender</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-3.5 w-3.5 text-[#18A866] shrink-0" />
-                  <span>About</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-3.5 w-3.5 text-[#18A866] shrink-0" />
-                  <span>Profile photo</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Check className="h-3.5 w-3.5 text-[#18A866] shrink-0" />
-                  <span>Skills</span>
-                </li>
-              </ul>
+
+              {/* Profile fields indicators */}
+              <div className="pt-3 border-t border-[#FAF5FB] flex flex-wrap gap-1.5 mt-2">
+                {["Name", "Age", "Gender", "About", "Photo", "Skills"].map(
+                  (item) => (
+                    <span
+                      key={item}
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#F7E8F0] text-[#B8325A]"
+                    >
+                      <Check className="h-2.5 w-2.5 text-[#18A866]" />
+                      {item}
+                    </span>
+                  )
+                )}
+              </div>
             </div>
 
             {/* Feature 3 */}
-            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-xs transition duration-200 flex flex-col">
-              <div className="h-11 w-11 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
-                <UserPlus className="h-5 w-5" />
+            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
+                  <UserPlus className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-[#252525] mb-2">
+                  3. Connect With Developers
+                </h3>
+                <p className="text-sm text-[#666666] leading-relaxed">
+                  Send connection requests to other developers and accept or reject incoming requests.
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-[#252525] mb-2">
-                3. Connect With Developers
-              </h3>
-              <p className="text-sm text-[#666666] leading-relaxed">
-                Users can send connection requests to other developers and accept or reject incoming requests.
-              </p>
             </div>
 
             {/* Feature 4 */}
-            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-xs transition duration-200 flex flex-col">
-              <div className="h-11 w-11 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
-                <MessageCircle className="h-5 w-5" />
+            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
+                  <MessageCircle className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-[#252525] mb-2">
+                  4. Real-Time Chat
+                </h3>
+                <p className="text-sm text-[#666666] leading-relaxed">
+                  Communicate with connected developers through real-time messaging.
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-[#252525] mb-2">
-                4. Real-Time Chat
-              </h3>
-              <p className="text-sm text-[#666666] leading-relaxed">
-                Connected developers can communicate through real-time messaging.
-              </p>
             </div>
 
             {/* Feature 5 */}
-            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-xs transition duration-200 flex flex-col">
-              <div className="h-11 w-11 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
-                <Users className="h-5 w-5" />
+            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
+                  <Users className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-[#252525] mb-2">
+                  5. Connections
+                </h3>
+                <p className="text-sm text-[#666666] leading-relaxed">
+                  View your connected developers and start conversations with them.
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-[#252525] mb-2">
-                5. Connections
-              </h3>
-              <p className="text-sm text-[#666666] leading-relaxed">
-                Users can view their connected developers and start conversations with them.
-              </p>
             </div>
 
             {/* Feature 6 */}
-            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-xs transition duration-200 flex flex-col">
-              <div className="h-11 w-11 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
-                <Sparkles className="h-5 w-5" />
+            <div className="feature-card p-6 rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-2xs hover:border-[#D43F6C]/40 hover:shadow-md hover:-translate-y-1 transition-all duration-200 flex flex-col justify-between">
+              <div>
+                <div className="h-12 w-12 rounded-xl bg-[#F7E8F0] text-[#D43F6C] flex items-center justify-center mb-4">
+                  <Sparkles className="h-6 w-6" />
+                </div>
+                <h3 className="text-lg font-bold text-[#252525] mb-2">
+                  6. Profile Matching
+                </h3>
+                <p className="text-sm text-[#666666] leading-relaxed">
+                  Browse developer profiles and choose whether to connect or skip.
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-[#252525] mb-2">
-                6. Profile Matching
-              </h3>
-              <p className="text-sm text-[#666666] leading-relaxed">
-                Users can browse developer profiles and choose whether to connect or skip.
-              </p>
             </div>
+
           </div>
         </div>
       </section>
 
       {/* ================================================== */}
-      {/* 4. SIMPLE CTA                                      */}
+      {/* 4. CALL TO ACTION SECTION                          */}
       {/* ================================================== */}
       <section
         ref={ctaRef}
@@ -331,10 +523,14 @@ export default function LandingPage() {
       >
         <div className="max-w-2xl mx-auto text-center flex flex-col items-center">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#252525]">
-            Start building your developer network.
+            Start Building Your Developer Network
           </h2>
 
-          <div className="mt-6">
+          <p className="mt-3 text-sm sm:text-base text-[#666666] max-w-lg leading-relaxed">
+            Discover developers, build connections, and start meaningful conversations with DevConnect.
+          </p>
+
+          <div className="mt-7">
             <Link
               to="/signup"
               className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-[#D43F6C] hover:bg-[#c0325d] text-white font-semibold text-base shadow-xs transition duration-150 active:scale-[0.98]"
