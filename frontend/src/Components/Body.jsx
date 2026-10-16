@@ -53,7 +53,7 @@ export default function Body() {
       <Navbar />
 
       {/* Main Content */}
-      <main className="relative z-10 flex-1 px-4 py-8 md:px-8 lg:px-12">
+      <main className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <Outlet />
       </main>
 

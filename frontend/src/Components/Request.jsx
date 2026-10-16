@@ -55,8 +55,7 @@ const Request = () => {
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-6">
-      
+    <div className="w-full max-w-5xl mx-auto">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight text-[#252525]">

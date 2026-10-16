@@ -27,9 +27,10 @@ function App() {
              <Route path="" element={<Feed />} />
 
             <Route path="profile" element={<Profile />} />
-            <Route path="connections" element={<Connection/>}></Route>
-            <Route path="requests" element={<Request/>}></Route>
-            <Route path="chat/:targetUserId" element={<Chat/>}></Route>
+            <Route path="connections" element={<Connection />} />
+            <Route path="chat" element={<Chat />} />
+            <Route path="chat/:targetUserId" element={<Chat />} />
+            <Route path="requests" element={<Request />} />
         </Route>
       </Routes>
     </BrowserRouter>
