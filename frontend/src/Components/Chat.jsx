@@ -75,18 +75,18 @@ useEffect(() => {
 
   return (
     <div className="w-full max-w-3xl mx-auto py-2">
-      <div className="rounded-2xl border border-slate-800 bg-slate-900 shadow-xl flex flex-col h-137.5 overflow-hidden">
+      <div className="rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-sm flex flex-col h-137.5 overflow-hidden">
 
         {/* Header */}
-        <div className="border-b border-slate-800 px-5 py-4 text-white font-bold bg-slate-900 flex items-center gap-2.5">
-          <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
+        <div className="border-b border-[#E9E3EC] px-5 py-4 text-[#252525] font-bold bg-[#FFFFFF] flex items-center gap-2.5">
+          <div className="w-2.5 h-2.5 bg-[#18A866] rounded-full"></div>
           <span>Conversation</span>
         </div>
 
         {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+        <div className="flex-1 overflow-y-auto p-5 space-y-4 bg-[#FAF5FB]">
           {messages.length === 0 ? (
-            <div className="flex items-center justify-center h-full text-slate-500 text-sm">
+            <div className="flex items-center justify-center h-full text-[#8A8A8A] text-sm">
               No messages yet. Send a message to start the conversation!
             </div>
           ) : (
@@ -99,7 +99,7 @@ useEffect(() => {
               >
                 <div className="max-w-[70%]">
                   <div
-                    className={`text-xs text-slate-400 font-semibold mb-1 ${
+                    className={`text-xs text-[#8A8A8A] font-semibold mb-1 ${
                       msg.userId === userId ? "text-right" : "text-left"
                     }`}
                   >
@@ -111,8 +111,8 @@ useEffect(() => {
                       px-4 py-2.5 rounded-2xl text-sm wrap-break-word shadow-sm
                       ${
                         msg.userId === userId
-                          ? "bg-indigo-600 text-white rounded-tr-sm border border-indigo-500/20"
-                          : "bg-slate-800 text-slate-200 rounded-tl-sm border border-slate-700/50"
+                          ? "bg-[#D43F6C] text-white rounded-tr-sm"
+                          : "bg-[#FFFFFF] text-[#252525] rounded-tl-sm border border-[#E9E3EC]"
                       }
                     `}
                   >
@@ -125,7 +125,7 @@ useEffect(() => {
         </div>
 
         {/* Input Area */}
-        <div className="border-t border-slate-800 p-4 flex gap-2 bg-slate-900">
+        <div className="border-t border-[#E9E3EC] p-4 flex gap-2 bg-[#FFFFFF]">
           <input
             type="text"
             placeholder="Type a message..."
@@ -136,11 +136,11 @@ useEffect(() => {
                 sendMessage();
               }
             }}
-            className="flex-1 bg-slate-950 border border-slate-800 text-white placeholder-slate-500 px-4 py-2.5 rounded-xl outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition duration-150 text-sm"
+            className="flex-1 bg-[#FAF5FB] border border-[#E9E3EC] text-[#252525] placeholder:text-[#8A8A8A] px-4 py-2.5 rounded-xl outline-none focus:border-[#D43F6C] focus:ring-1 focus:ring-[#D43F6C] transition duration-150 text-sm"
           />
 
           <button
-            className="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl transition font-semibold text-sm active:scale-[0.98] cursor-pointer"
+            className="bg-[#D43F6C] hover:bg-[#c0325d] text-white px-5 py-2.5 rounded-xl transition font-semibold text-sm shadow-sm active:scale-[0.98] cursor-pointer"
             onClick={sendMessage}
           >
             Send

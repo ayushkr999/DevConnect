@@ -53,67 +53,67 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-6 md:p-10 relative overflow-hidden">
+    <div className="min-h-screen bg-[#FAF5FB] flex items-center justify-center p-6 md:p-10 relative overflow-hidden">
       
-      {/* Subtle background glow */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
+      {/* Subtle background soft accents */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#F7F4FE] rounded-full blur-[120px] pointer-events-none opacity-80" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#F7E8F0]/50 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="w-full max-w-5xl grid md:grid-cols-12 gap-10 items-center relative z-10">
         
         {/* LEFT SIDE: Branding (Hidden on mobile) */}
-        <div className="text-white space-y-8 col-span-7 hidden md:block pr-8">
+        <div className="text-[#252525] space-y-8 col-span-7 hidden md:block pr-8">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 shadow-lg shadow-indigo-600/20">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#D43F6C] shadow-sm">
               <Code2 className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-4xl font-extrabold tracking-tight">
-                Dev<span className="text-indigo-400">Connect</span>
+              <h1 className="text-4xl font-extrabold tracking-tight text-[#252525]">
+                Dev<span className="text-[#D43F6C]">Connect</span>
               </h1>
-              <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider">
+              <p className="text-xs text-[#8A8A8A] font-semibold uppercase tracking-wider">
                 Developer Network
               </p>
             </div>
           </div>
 
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight text-slate-100">
+            <h2 className="text-3xl font-bold tracking-tight text-[#252525]">
               Swipe. Match. Connect.
             </h2>
-            <p className="text-lg text-slate-400 leading-relaxed max-w-md">
+            <p className="text-lg text-[#666666] leading-relaxed max-w-md">
               A peer-matching platform designed for developers to collaborate, share projects, and learn.
             </p>
           </div>
 
           <div className="space-y-5 pt-4">
             <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-indigo-400">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FFFFFF] border border-[#E9E3EC] text-[#D43F6C] shadow-sm">
                 <Compass className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-200">Discover Peers</h3>
-                <p className="text-sm text-slate-400">Find students and developers with matching interests or complementary tech stacks.</p>
+                <h3 className="font-semibold text-[#252525]">Discover Peers</h3>
+                <p className="text-sm text-[#666666]">Find students and developers with matching interests or complementary tech stacks.</p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-indigo-400">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FFFFFF] border border-[#E9E3EC] text-[#D43F6C] shadow-sm">
                 <MessageSquare className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-200">Direct Messaging</h3>
-                <p className="text-sm text-slate-400">Connect instantly and chat with your matches in real-time about your hackathons or projects.</p>
+                <h3 className="font-semibold text-[#252525]">Direct Messaging</h3>
+                <p className="text-sm text-[#666666]">Connect instantly and chat with your matches in real-time about your hackathons or projects.</p>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-indigo-400">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FFFFFF] border border-[#E9E3EC] text-[#D43F6C] shadow-sm">
                 <Sparkles className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-200">Build Collaborations</h3>
-                <p className="text-sm text-slate-400">Go beyond networking—find team members for your college project or startup ideas.</p>
+                <h3 className="font-semibold text-[#252525]">Build Collaborations</h3>
+                <p className="text-sm text-[#666666]">Go beyond networking—find team members for your college project or startup ideas.</p>
               </div>
             </div>
           </div>
@@ -124,24 +124,24 @@ const AuthPage = () => {
           
           {/* Logo visible only on Mobile */}
           <div className="flex flex-col items-center gap-2 mb-8 md:hidden text-center">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 shadow-md shadow-indigo-600/10">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D43F6C] shadow-sm">
               <Code2 className="h-5 w-5 text-white" />
             </div>
-            <h1 className="text-2xl font-extrabold text-white tracking-wide">
-              Dev<span className="text-indigo-400">Connect</span>
+            <h1 className="text-2xl font-extrabold text-[#252525] tracking-wide">
+              Dev<span className="text-[#D43F6C]">Connect</span>
             </h1>
-            <p className="text-xs text-slate-400 uppercase tracking-widest font-semibold">
+            <p className="text-xs text-[#8A8A8A] uppercase tracking-widest font-semibold">
               Developer Network
             </p>
           </div>
 
-          <div className="bg-slate-900/60 border border-slate-800 p-8 rounded-2xl shadow-xl text-white">
+          <div className="bg-[#FFFFFF] border border-[#E9E3EC] p-8 rounded-2xl shadow-sm text-[#252525]">
             
             <div className="mb-6">
-              <h2 className="text-2xl font-bold tracking-tight text-white text-center">
+              <h2 className="text-2xl font-bold tracking-tight text-[#252525] text-center">
                 {isLoginForm ? "Welcome back" : "Create an account"}
               </h2>
-              <p className="text-center text-slate-400 text-sm mt-1">
+              <p className="text-center text-[#666666] text-sm mt-1">
                 {isLoginForm ? "Enter details to access your account" : "Join the developer network today"}
               </p>
             </div>
@@ -152,7 +152,7 @@ const AuthPage = () => {
               {!isLoginForm && (
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-semibold text-[#666666] uppercase tracking-wider mb-1.5">
                       First Name
                     </label>
                     <input
@@ -160,11 +160,11 @@ const AuthPage = () => {
                       placeholder="Jane"
                       value={FirstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder:text-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition duration-150 text-sm"
+                      className="w-full px-4 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#E9E3EC] text-[#252525] placeholder:text-[#8A8A8A] focus:outline-none focus:border-[#D43F6C] focus:ring-1 focus:ring-[#D43F6C] transition duration-150 text-sm"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-semibold text-[#666666] uppercase tracking-wider mb-1.5">
                       Last Name
                     </label>
                     <input
@@ -172,14 +172,14 @@ const AuthPage = () => {
                       placeholder="Doe"
                       value={LastName}
                       onChange={(e) => setLastName(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder:text-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition duration-150 text-sm"
+                      className="w-full px-4 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#E9E3EC] text-[#252525] placeholder:text-[#8A8A8A] focus:outline-none focus:border-[#D43F6C] focus:ring-1 focus:ring-[#D43F6C] transition duration-150 text-sm"
                     />
                   </div>
                 </div>
               )}
 
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-semibold text-[#666666] uppercase tracking-wider mb-1.5">
                   Email address
                 </label>
                 <input
@@ -187,12 +187,12 @@ const AuthPage = () => {
                   placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder:text-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition duration-150 text-sm"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#E9E3EC] text-[#252525] placeholder:text-[#8A8A8A] focus:outline-none focus:border-[#D43F6C] focus:ring-1 focus:ring-[#D43F6C] transition duration-150 text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-semibold text-[#666666] uppercase tracking-wider mb-1.5">
                   Password
                 </label>
                 <input
@@ -200,13 +200,13 @@ const AuthPage = () => {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder:text-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition duration-150 text-sm"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#FFFFFF] border border-[#E9E3EC] text-[#252525] placeholder:text-[#8A8A8A] focus:outline-none focus:border-[#D43F6C] focus:ring-1 focus:ring-[#D43F6C] transition duration-150 text-sm"
                 />
               </div>
 
               {/* Error Alert Box */}
               {error && (
-                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-3.5 text-red-400 text-xs flex items-start gap-2.5">
+                <div className="bg-rose-50 border border-rose-200 rounded-xl p-3.5 text-rose-600 text-xs flex items-start gap-2.5">
                   <AlertCircle className="h-4.5 w-4.5 shrink-0 mt-0.5" />
                   <span>{error}</span>
                 </div>
@@ -215,7 +215,7 @@ const AuthPage = () => {
               {/* Submit Button */}
               <button
                 onClick={isLoginForm ? handleLogin : handleSignUp}
-                className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-600/10 transition duration-150 text-sm active:scale-[0.98] mt-2 cursor-pointer"
+                className={`w-full py-2.5 ${isLoginForm ? "bg-[#D43F6C] hover:bg-[#c0325d]" : "bg-[#F05A24] hover:bg-[#E85D04]"} text-white font-semibold rounded-xl shadow-sm transition duration-150 text-sm active:scale-[0.98] mt-2 cursor-pointer`}
               >
                 {isLoginForm ? "Sign In" : "Get Started"}
               </button>
@@ -223,7 +223,7 @@ const AuthPage = () => {
             </div>
 
             {/* Toggle Link */}
-            <p className="text-sm text-slate-400 mt-6 text-center">
+            <p className="text-sm text-[#666666] mt-6 text-center">
               {isLoginForm ? "Don't have an account?" : "Already have an account?"}
               <button
                 type="button"
@@ -231,7 +231,7 @@ const AuthPage = () => {
                   setIsLoginForm((value) => !value);
                   setError("");
                 }}
-                className="text-indigo-400 hover:text-indigo-300 font-semibold cursor-pointer hover:underline ml-1.5 focus:outline-none"
+                className="text-[#D43F6C] hover:text-[#ED488F] font-semibold cursor-pointer hover:underline ml-1.5 focus:outline-none"
               >
                 {isLoginForm ? "Create an account" : "Sign in"}
               </button>

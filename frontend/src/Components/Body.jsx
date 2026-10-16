@@ -38,15 +38,15 @@ export default function Body() {
   }, []);
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-linear-to-br from-slate-950 via-slate-900 to-black text-white">
+    <div className="relative flex min-h-screen flex-col bg-[#FAF5FB] text-[#252525]">
 
-      {/* Background Glow */}
+      {/* Background Soft Accents */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -left-24 top-0 h-96 w-96 rounded-full bg-violet-600/20 blur-[150px]" />
+        <div className="absolute -left-24 top-0 h-96 w-96 rounded-full bg-[#F7F4FE] blur-[150px] opacity-70" />
 
-        <div className="absolute right-0 top-40 h-96 w-96 rounded-full bg-fuchsia-600/15 blur-[170px]" />
+        <div className="absolute right-0 top-40 h-96 w-96 rounded-full bg-[#F7E8F0]/40 blur-[170px]" />
 
-        <div className="absolute bottom-0 left-1/2 h-120 w-120 -translate-x-1/2 rounded-full bg-indigo-600/10 blur-[180px]" />
+        <div className="absolute bottom-0 left-1/2 h-120 w-120 -translate-x-1/2 rounded-full bg-[#F7F4FE] blur-[180px] opacity-60" />
       </div>
 
       {/* Navbar */}

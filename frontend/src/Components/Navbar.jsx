@@ -31,19 +31,19 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-800 bg-slate-900/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-[#E9E3EC] bg-[#FFFFFF]/95 backdrop-blur-md">
       <div className="w-full flex h-16 items-center justify-between px-6 md:px-10">
 
         {/* Left Side: Logo */}
         <Link to="/app" className="flex items-center gap-2.5 group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-md shadow-indigo-600/10 group-hover:bg-indigo-500 transition duration-200">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#D43F6C] text-white shadow-sm group-hover:bg-[#ED488F] transition duration-200">
             <Code2 className="h-5 w-5" />
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-lg font-bold text-white tracking-wide">
-              Dev<span className="text-indigo-400">Connect</span>
+            <span className="text-lg font-bold text-[#252525] tracking-wide">
+              Dev<span className="text-[#D43F6C]">Connect</span>
             </span>
-            <span className="text-[10px] text-slate-400 font-medium uppercase tracking-wider">
+            <span className="text-[10px] text-[#8A8A8A] font-medium uppercase tracking-wider">
               Developer Network
             </span>
           </div>
@@ -56,8 +56,8 @@ export function Navbar() {
               to="/app"
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition duration-200 ${
                 isActive("/app")
-                  ? "bg-indigo-600/10 text-indigo-400"
-                  : "text-slate-300 hover:bg-slate-800/60 hover:text-white"
+                  ? "bg-[#F7E8F0] text-[#D43F6C]"
+                  : "text-[#666666] hover:bg-[#F7F4FE] hover:text-[#252525]"
               }`}
             >
               <Compass className="h-4 w-4" />
@@ -68,8 +68,8 @@ export function Navbar() {
               to="/app/connections"
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition duration-200 ${
                 isActive("/app/connections")
-                  ? "bg-indigo-600/10 text-indigo-400"
-                  : "text-slate-300 hover:bg-slate-800/60 hover:text-white"
+                  ? "bg-[#F7E8F0] text-[#D43F6C]"
+                  : "text-[#666666] hover:bg-[#F7F4FE] hover:text-[#252525]"
               }`}
             >
               <Users className="h-4 w-4" />
@@ -80,8 +80,8 @@ export function Navbar() {
               to="/app/requests"
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition duration-200 ${
                 isActive("/app/requests")
-                  ? "bg-indigo-600/10 text-indigo-400"
-                  : "text-slate-300 hover:bg-slate-800/60 hover:text-white"
+                  ? "bg-[#F7E8F0] text-[#D43F6C]"
+                  : "text-[#666666] hover:bg-[#F7F4FE] hover:text-[#252525]"
               }`}
             >
               <UserPlus className="h-4 w-4" />
@@ -95,7 +95,7 @@ export function Navbar() {
           <div className="relative">
             <button
               onClick={() => setOpen(!open)}
-              className="flex items-center gap-2 p-1 rounded-full border border-slate-700 bg-slate-800 hover:border-slate-600 focus:outline-none transition duration-200"
+              className="flex items-center gap-2 p-1 rounded-full border border-[#E9E3EC] bg-[#FFFFFF] hover:border-[#D43F6C] focus:outline-none transition duration-200"
             >
               <img
                 src={user?.photoUrl || "https://dummyimage.com/100x100/cccccc/000000&text=User"}
@@ -108,55 +108,55 @@ export function Navbar() {
               <>
                 <div className="fixed inset-0 z-10" onClick={() => setOpen(false)}></div>
                 
-                <div className="absolute right-0 mt-2.5 w-52 overflow-hidden rounded-xl border border-slate-800 bg-slate-900 shadow-xl z-20">
+                <div className="absolute right-0 mt-2.5 w-52 overflow-hidden rounded-xl border border-[#E9E3EC] bg-[#FFFFFF] shadow-lg z-20">
                   <div className="p-1">
                     <Link
                       to="/app/profile"
                       onClick={() => setOpen(false)}
-                      className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition duration-150"
+                      className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#252525] hover:bg-[#FAF5FB] hover:text-[#D43F6C] transition duration-150"
                     >
-                      <User className="h-4 w-4 text-slate-400" />
+                      <User className="h-4 w-4 text-[#8A8A8A]" />
                       Profile Settings
                     </Link>
 
                     {/* Mobile Navigation in Dropdown */}
-                    <div className="md:hidden border-t border-slate-800/50 mt-1 pt-1">
+                    <div className="md:hidden border-t border-[#E9E3EC] mt-1 pt-1">
                       <Link
                         to="/app"
                         onClick={() => setOpen(false)}
-                        className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition duration-150"
+                        className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#252525] hover:bg-[#FAF5FB] hover:text-[#D43F6C] transition duration-150"
                       >
-                        <Compass className="h-4 w-4 text-slate-400" />
+                        <Compass className="h-4 w-4 text-[#8A8A8A]" />
                         Discover
                       </Link>
 
                       <Link
                         to="/app/connections"
                         onClick={() => setOpen(false)}
-                        className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition duration-150"
+                        className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#252525] hover:bg-[#FAF5FB] hover:text-[#D43F6C] transition duration-150"
                       >
-                        <Users className="h-4 w-4 text-slate-400" />
+                        <Users className="h-4 w-4 text-[#8A8A8A]" />
                         Connections
                       </Link>
 
                       <Link
                         to="/app/requests"
                         onClick={() => setOpen(false)}
-                        className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition duration-150"
+                        className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-[#252525] hover:bg-[#FAF5FB] hover:text-[#D43F6C] transition duration-150"
                       >
-                        <UserPlus className="h-4 w-4 text-slate-400" />
+                        <UserPlus className="h-4 w-4 text-[#8A8A8A]" />
                         Requests
                       </Link>
                     </div>
 
-                    <div className="my-1 border-t border-slate-800"></div>
+                    <div className="my-1 border-t border-[#E9E3EC]"></div>
 
                     <button
                       onClick={() => {
                         setOpen(false);
                         handleLogout();
                       }}
-                      className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-red-400 hover:bg-red-500/10 transition duration-150"
+                      className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-rose-600 hover:bg-rose-50 transition duration-150 cursor-pointer"
                     >
                       <LogOut className="h-4 w-4" />
                       Logout

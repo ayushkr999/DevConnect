@@ -27,19 +27,19 @@ const Connection = () => {
   if (connections.length === 0) {
     return (
       <div className="flex min-h-[calc(100vh-140px)] items-center justify-center px-4">
-        <div className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900 p-8 text-center shadow-lg">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-indigo-500/10 text-indigo-400 mb-6">
+        <div className="w-full max-w-md rounded-2xl border border-[#E9E3EC] bg-[#FFFFFF] p-8 text-center shadow-sm">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#F7E8F0] text-[#D43F6C] mb-6">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
               <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m0 0-.003-.031c0-.225.012-.447.037-.666A11.944 11.944 0 0 1 12 15c2.17 0 4.207.576 5.963 1.584A6.062 6.062 0 0 1 18 18.72Zm-12-1.4A6 6 0 0 0 1.8 17.32a3 3 0 0 0 4.681 2.72 11.996 11.996 0 0 0 1.418-1.725ZM16.5 7.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM18 8.25a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0ZM7.125 8.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" />
             </svg>
           </div>
-          <h2 className="text-xl font-bold text-white mb-2">No Connections Yet</h2>
-          <p className="text-sm text-slate-400 leading-relaxed mb-6">
+          <h2 className="text-xl font-bold text-[#252525] mb-2">No Connections Yet</h2>
+          <p className="text-sm text-[#666666] leading-relaxed mb-6">
             You haven't connected with any other developers yet. Start discovering peers on the home feed!
           </p>
           <Link
             to="/app"
-            className="inline-block w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-center transition duration-200"
+            className="inline-block w-full py-2.5 rounded-xl bg-[#D43F6C] hover:bg-[#c0325d] text-white font-semibold shadow-sm text-center transition duration-200"
           >
             Discover Developers
           </Link>
@@ -53,10 +53,10 @@ const Connection = () => {
       
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight text-white">
+        <h1 className="text-3xl font-bold tracking-tight text-[#252525]">
           Your Connections
         </h1>
-        <p className="mt-1.5 text-sm text-slate-400">
+        <p className="mt-1.5 text-sm text-[#666666]">
           You have connected with {connections.length} developer{connections.length > 1 && "s"}.
         </p>
       </div>
@@ -66,7 +66,7 @@ const Connection = () => {
         {connections.map((connection) => (
           <div
             key={connection._id}
-            className="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between bg-slate-900 border border-slate-800 rounded-2xl shadow-sm hover:border-slate-700 transition duration-150"
+            className="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between bg-[#FFFFFF] border border-[#E9E3EC] rounded-2xl shadow-sm hover:border-[#D43F6C]/30 transition duration-150"
           >
             {/* Left Info section */}
             <div className="flex items-start gap-4">
@@ -76,25 +76,25 @@ const Connection = () => {
                 <img
                   src={connection.photoUrl || "https://dummyimage.com/100x100/cccccc/000000&text=User"}
                   alt={`${connection.firstname} ${connection.lastname}`}
-                  className="h-16 w-16 rounded-xl object-cover border border-slate-800"
+                  className="h-16 w-16 rounded-xl object-cover border border-[#E9E3EC]"
                 />
-                <span className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full border-2 border-slate-900 bg-green-500"></span>
+                <span className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full border-2 border-[#FFFFFF] bg-[#18A866]"></span>
               </div>
 
               {/* Text details */}
               <div>
-                <h2 className="text-lg font-bold text-white leading-snug">
+                <h2 className="text-lg font-bold text-[#252525] leading-snug">
                   {connection.firstname} {connection.lastname}
                 </h2>
                 
                 {connection.age && (
-                  <p className="text-xs text-slate-400 font-semibold mt-0.5">
+                  <p className="text-xs text-[#8A8A8A] font-semibold mt-0.5">
                     {connection.age} years old
                   </p>
                 )}
 
                 {connection.AboutUs && (
-                  <p className="mt-2 text-sm text-slate-400 leading-relaxed max-w-md line-clamp-2">
+                  <p className="mt-2 text-sm text-[#666666] leading-relaxed max-w-md line-clamp-2">
                     {connection.AboutUs}
                   </p>
                 )}
@@ -105,7 +105,7 @@ const Connection = () => {
                     {connection.skills.slice(0, 4).map((skill, index) => (
                       <span
                         key={index}
-                        className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/10"
+                        className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#F7E8F0] text-[#B8325A] border border-[#E9E3EC]"
                       >
                         {skill.trim()}
                       </span>
@@ -119,7 +119,7 @@ const Connection = () => {
             <div className="shrink-0">
               <Link
                 to={`/app/chat/${connection._id}`}
-                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 px-5 py-2.5 text-sm font-semibold text-white transition duration-150"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-[#D43F6C] hover:bg-[#c0325d] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition duration-150"
               >
                 💬 Message
               </Link>
